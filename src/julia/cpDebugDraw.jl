@@ -1,5 +1,5 @@
 # Color is from 0.0 to 1.0
-type DebugColor
+struct DebugColor
     r::Float32
     g::Float32
     b::Float32
@@ -7,7 +7,7 @@ type DebugColor
 end
 
 function sfColor(debugcolor)
-    SFML.Color(Uint8(floor(debugcolor.r * 255)), Uint8(floor(debugcolor.g * 255)), Uint8(floor(debugcolor.b * 255)), Uint8(floor(debugcolor.a * 255)))
+    SFML.Color(UInt8(floor(debugcolor.r * 255)), UInt8(floor(debugcolor.g * 255)), UInt8(floor(debugcolor.b * 255)), UInt8(floor(debugcolor.a * 255)))
 end
 
 function debug_draw_circle(pos::Vect, angle::Cdouble, radius::Cdouble, outlinecolor::DebugColor, fillcolor::DebugColor, data::Ptr{Void})

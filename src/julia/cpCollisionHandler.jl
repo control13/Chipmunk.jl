@@ -47,6 +47,6 @@ function CollisionHandler(typeA::Integer, typeB::Integer, begin_func::Function, 
     c_postsolve = cfunction(rpostsolve_func, Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}))
     c_separate = cfunction(rseparate_func, Void, (Ptr{Void}, Ptr{Void}, Ptr{Void}))
     ccall(dlsym(libchipmunkjl, :cpCollisionHandler_create), Ptr{Void},
-         (Uint32, Uint32, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}),
+         (UInt32, UInt32, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}),
           typeA, typeB, c_begin, c_presolve, c_postsolve, c_separate, real_data)
 end

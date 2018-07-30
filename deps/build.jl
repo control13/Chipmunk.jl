@@ -2,7 +2,9 @@ cd("$(Pkg.dir("Chipmunk"))/deps")
 println("Checking dependencies...")
 
 try
-    @unix_only run(`which cmake`)
+    @static if is_linux()
+        run(`which cmake`)
+    end
 catch exception
     error("You must install cmake to build this package.")
 end
@@ -25,17 +27,17 @@ run(`cmake . -DBUILD_DEMOS=OFF`)
 run(`make`)
 
 ext = ""
-@linux_only ext = "so"
-@osx_only ext = "dylib"
-@windows_only ext = "dll"
 
-@linux_only begin
+@static if is_linux()
+    ext = "so"
     cp("src/libchipmunk.so.7.0.0", "../libchipmunk.so", remove_destination=true)
 end
-@osx_only begin
+@static if is_apple()
+    ext = "dylib"
     cp("src/libchipmunk.7.0.0.dylib", "../libchipmunk.dylib", remove_destination=true)
 end
-@windows_only begin
+@static if is_windows()
+    ext = "dll"
     cp("src/libchipmunk.7.0.0.dll", "../libchipmunk.dll", remove_destination=true)
 end
 

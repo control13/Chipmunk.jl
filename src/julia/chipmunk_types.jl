@@ -1,70 +1,70 @@
-type Space
+struct Space
     ptr::Ptr{Void}
 end
 
-type Body
+struct Body
     ptr::Ptr{Void}
 end
 
-type Arbiter
+struct Arbiter
     ptr::Ptr{Void}
 end
 
-abstract Shape
-type CircleShape <: Shape
+abstract type Shape end
+struct CircleShape <: Shape
     ptr::Ptr{Void}
 end
 
-type SegmentShape <: Shape
+struct SegmentShape <: Shape
     ptr::Ptr{Void}
 end
 
-type PolyShape <: Shape
+struct PolyShape <: Shape
     ptr::Ptr{Void}
 end
 
-abstract Constraint
-type SimpleMotor <: Constraint
+abstract type Constraint end
+struct SimpleMotor <: Constraint
     ptr::Ptr{Void}
 end
 
-type PivotJoint <: Constraint
+struct PivotJoint <: Constraint
     ptr::Ptr{Void}
 end
 
-type PinJoint <: Constraint
+struct PinJoint <: Constraint
     ptr::Ptr{Void}
 end
 
-type GearJoint <: Constraint
+struct GearJoint <: Constraint
     ptr::Ptr{Void}
 end
 
-type SlideJoint <: Constraint
+struct SlideJoint <: Constraint
     ptr::Ptr{Void}
 end
 
-type DampedSpring <: Constraint
+struct DampedSpring <: Constraint
     ptr::Ptr{Void}
 end
 
-type CollisionHandler
+struct CollisionHandler
     ptr::Ptr{Void}
 end
 
-type BB
+struct BB
     l::Cdouble
     b::Cdouble
     r::Cdouble
     t::Cdouble
 end
 
-type Vect
+struct Vect
     x::Cdouble
     y::Cdouble
 end
 
-type Transform
+struct Transform
     a::Cdouble
     b::Cdouble
     c::Cdouble
@@ -73,7 +73,7 @@ type Transform
     ty::Cdouble
 end
 
-type Mat2x2
+struct Mat2x2
     a::Cdouble
     b::Cdouble
     c::Cdouble

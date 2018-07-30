@@ -79,7 +79,7 @@ function get_center_of_gravity(shape::Shape)
 end
 
 function get_sensor(shape::Shape)
-    Bool(ccall(libchipmunk, :cpShapeGetSensor), Uint8, (Ptr{Void},), shape.ptr)
+    Bool(ccall(libchipmunk, :cpShapeGetSensor), UInt8, (Ptr{Void},), shape.ptr)
 end
 
 function set_sensor(shape::Shape, sensor::Bool)
@@ -119,11 +119,11 @@ function set_userdata(shape::Shape, userdata::Ptr{Void})
 end
 
 function get_collision_type(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetCollisionType), Uint32, (Ptr{Void},), shape.ptr)
+    ccall(dlsym(libchipmunk, :cpShapeGetCollisionType), UInt32, (Ptr{Void},), shape.ptr)
 end
 
 function set_collision_type(shape::Shape, ctype::Integer)
-    ccall(dlsym(libchipmunk, :cpShapeSetCollisionType), Void, (Ptr{Void}, Uint32,), shape.ptr, ctype)
+    ccall(dlsym(libchipmunk, :cpShapeSetCollisionType), Void, (Ptr{Void}, UInt32,), shape.ptr, ctype)
 end
 
 export free, get_space, get_body, set_body, get_mass, set_mass, get_density, set_density, get_moment, get_area,
