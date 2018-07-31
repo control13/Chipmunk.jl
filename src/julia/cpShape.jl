@@ -87,7 +87,7 @@ function set_sensor(shape::Shape, sensor::Bool)
 end
 
 function get_elasticity(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetElasticity), Cdouble, (Ptr{Void}, Int32,), shape.ptr)
+    ccall(dlsym(libchipmunk, :cpShapeGetElasticity), Cdouble, (Ptr{Void},), shape.ptr)
 end
 
 function set_elasticity(shape::Shape, elasticity::Real)

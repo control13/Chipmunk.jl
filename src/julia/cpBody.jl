@@ -81,9 +81,9 @@ function set_type(body::Body, body_type::BodyType)
     ccall(dlsym(libchipmunk, :cpBodySetType), Void, (Ptr{Void}, Int32,), body.ptr, body_type)
 end
 
-# function accumulate_mass_from_shapes(body::Body)
-#   ccall(dlsym(libchipmunk, :cpBodyAccumulateMassFromShapes), Void, (Ptr{Void},), body.ptr)
-# end
+function accumulate_mass_from_shapes(body::Body)
+  ccall(dlsym(libchipmunk, :cpBodyAccumulateMassFromShapes), Void, (Ptr{Void},), body.ptr)
+end
 
 # Get the space this body is added to.
 function get_space(body::Body)
@@ -177,7 +177,7 @@ end
 
 # Set the torque applied to the body for the next time step.
 function set_torque(body::Body, torque::Real)
-    ccall(dlsym(libchipmunk, :cpBodySetTorque), Void, (Ptr{Void}, Cdouble,), body.ptr)
+    ccall(dlsym(libchipmunk, :cpBodySetTorque), Void, (Ptr{Void}, Cdouble,), body.ptr, torque)
 end
 
 # Get the rotation vector of the body. (The x basis vector of it's transform.)
