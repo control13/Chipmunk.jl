@@ -195,6 +195,16 @@ function set_userdata(body::Body, userdata::Ptr{Void})
     ccall(dlsym(libchipmunk, :cpBodySetUserData), Void, (Ptr{Void}, Ptr{Void},), body.ptr, userdata)
 end
 
+# Set the update function for the velocity assigned to the body.
+function set_velocity_update_func(body::Body, update_func::Function)
+    ccall(dlsym(libchipmunk, :cpBodySetVelocityUpdateFunc), Void, (Ptr{Void}, Ptr{Void},), body.ptr, cfunction(update_func, Void, (Ptr{Void}, Vect, Cdouble, Cdouble)))
+end
+
+# Set the update function for the position assigned to the body.
+function set_position_update_func(body::Body, update_func::Function)
+    ccall(dlsym(libchipmunk, :cpBodySetPositionUpdateFunc), Void, (Ptr{Void}, Ptr{Void},), body.ptr, cfunction(update_func, Void, (Ptr{Void}, Cdouble)))
+end
+
 # Default velocity integration function.
 function update_velocity(body::Body, gravity::Vect, damping::Real, dt::Real)
     ccall(dlsym(libchipmunk, :cpBodyUpdateVelocity), Void, (Ptr{Void}, Vect, Cdouble, Cdouble,), body.ptr, gravity, damping, dt)
@@ -254,7 +264,7 @@ export Body, KinematicBody, StaticBody, BodyType, init, free, is_sleeping, get_t
 get_space, get_mass, set_mass, get_moment, set_moment, set_position, get_position, get_velocity,
 set_velocity, activate, activate_static, sleep, get_angle, set_angle, get_center_of_gravity,
 set_center_of_gravity, get_force, set_force, get_angular_velocity, set_angular_velocity, 
-get_torque, set_torque, get_rotation, get_userdata, set_userdata, update_velocity, update_position,
+get_torque, set_torque, get_rotation, get_userdata, set_userdata, set_velocity_update_func, set_position_update_func, update_velocity, update_position,
 local_to_world, world_to_local, apply_impulse_at_world_point, apply_force_at_local_point,
 apply_impulse_at_world_point, apply_impulse_at_local_point, get_velocity_at_world_point,
 get_velocity_at_local_point, kinetic_energy
