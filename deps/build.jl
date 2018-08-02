@@ -19,9 +19,9 @@ if !isdir("Chipmunk2D")
 end
 
 cd("Chipmunk2D")
-run(`git checkout Chipmunk-7.0.0`)
+run(`git checkout Chipmunk-7.0.2`)
 
-run(`git checkout Chipmunk-7.0.0`)
+# run(`git checkout Chipmunk-7.0.0`)
 
 run(`cmake . -DBUILD_DEMOS=OFF`)
 run(`make`)
