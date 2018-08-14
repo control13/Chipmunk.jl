@@ -29,3 +29,19 @@ cpSpaceDebugDrawOptions* cpjlDebugDrawOptions(cpSpaceDebugDrawCircleImpl drawCir
 
     return options;
 }
+
+void cpjlSetCollisionHandler(cpSpace *space, cpCollisionType a, cpCollisionType b, cpCollisionBeginFunc beginFunc, cpCollisionPreSolveFunc preSolveFunc, cpCollisionPostSolveFunc postSolveFunc, cpCollisionSeparateFunc separateFunc) {
+    cpCollisionHandler *handler = cpSpaceAddCollisionHandler(space, a, b);
+    if(beginFunc != NULL) {
+	    handler->beginFunc = (cpCollisionBeginFunc)beginFunc;
+    }
+    if(preSolveFunc != NULL) {
+	    handler->preSolveFunc = (cpCollisionPreSolveFunc)preSolveFunc;
+    }
+    if(postSolveFunc != NULL) {
+	    handler->postSolveFunc = (cpCollisionPostSolveFunc)postSolveFunc;
+    }
+    if(separateFunc != NULL) {
+	    handler->separateFunc = (cpCollisionSeparateFunc)separateFunc;
+    }
+}
