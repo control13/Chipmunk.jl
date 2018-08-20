@@ -30,7 +30,7 @@ cpSpaceDebugDrawOptions* cpjlDebugDrawOptions(cpSpaceDebugDrawCircleImpl drawCir
     return options;
 }
 
-void cpjlSetCollisionHandler(cpSpace *space, cpCollisionType a, cpCollisionType b, cpCollisionBeginFunc beginFunc, cpCollisionPreSolveFunc preSolveFunc, cpCollisionPostSolveFunc postSolveFunc, cpCollisionSeparateFunc separateFunc) {
+void cpjlSetCollisionHandler(cpSpace *space, cpCollisionType a, cpCollisionType b, cpCollisionBeginFunc beginFunc, cpCollisionPreSolveFunc preSolveFunc, cpCollisionPostSolveFunc postSolveFunc, cpCollisionSeparateFunc separateFunc, cpDataPointer userData) {
     cpCollisionHandler *handler = cpSpaceAddCollisionHandler(space, a, b);
     if(beginFunc != NULL) {
 	    handler->beginFunc = (cpCollisionBeginFunc)beginFunc;
@@ -43,5 +43,8 @@ void cpjlSetCollisionHandler(cpSpace *space, cpCollisionType a, cpCollisionType 
     }
     if(separateFunc != NULL) {
 	    handler->separateFunc = (cpCollisionSeparateFunc)separateFunc;
+    }
+    if(userData != NULL) {
+	    handler->userData = (cpDataPointer)userData;
     }
 }

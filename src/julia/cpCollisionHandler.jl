@@ -51,10 +51,11 @@ end
 #           typeA, typeB, c_begin, c_presolve, c_postsolve, c_separate, real_data)
 # end
 
-function cpSetCollisionHandler(space::Space, typeA::Integer, typeB::Integer, begin_func::Union{Function, Void}, presolve_func::Union{Function, Void}, postsolve_func::Union{Function, Void}, separate_func::Union{Function, Void})
+function cpSetCollisionHandler(space::Space, typeA::Integer, typeB::Integer, begin_func::Union{Function, Void}, presolve_func::Union{Function, Void}, postsolve_func::Union{Function, Void}, separate_func::Union{Function, Void}, user_data::Any)
     c_begin = typeof(begin_func) <: Function ? cfunction(begin_func, Bool, (Ptr{Void}, Ptr{Void}, Ptr{Void})) : C_NULL
     c_presolve =  typeof(presolve_func) <: Function ? cfunction(presolve_func, Bool, (Ptr{Void}, Ptr{Void}, Ptr{Void})) : C_NULL
     c_postsolve =  typeof(postsolve_func) <: Function ? cfunction(postsolve_func, Void, (Ptr{Void}, Ptr{Void}, Ptr{Void})) : C_NULL
     c_separate =  typeof(separate_func) <: Function ? cfunction(separate_func, Void, (Ptr{Void}, Ptr{Void}, Ptr{Void})) : C_NULL
-    ccall(dlsym(libchipmunkjl, :cpjlSetCollisionHandler), Ptr{Void}, (Ptr{Void}, UInt32, UInt32, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}), space.ptr, typeA, typeB, c_begin, c_presolve, c_postsolve, c_separate)
+    c_usrdata =  user_data != nothing ? pointer_from_objref(user_data) : C_NULL
+    ccall(dlsym(libchipmunkjl, :cpjlSetCollisionHandler), Ptr{Void}, (Ptr{Void}, UInt32, UInt32, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void}), space.ptr, typeA, typeB, c_begin, c_presolve, c_postsolve, c_separate, c_usrdata)
 end
