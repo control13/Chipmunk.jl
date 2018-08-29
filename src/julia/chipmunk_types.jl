@@ -1,55 +1,55 @@
 struct Space
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct Body
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct Arbiter
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 abstract type Shape end
 struct CircleShape <: Shape
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct SegmentShape <: Shape
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct PolyShape <: Shape
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 abstract type Constraint end
 struct SimpleMotor <: Constraint
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct PivotJoint <: Constraint
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct PinJoint <: Constraint
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct GearJoint <: Constraint
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct SlideJoint <: Constraint
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct DampedSpring <: Constraint
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct CollisionHandler
-    ptr::Ptr{Void}
+    ptr::Ptr{Cvoid}
 end
 
 struct BB

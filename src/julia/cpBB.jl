@@ -2,12 +2,12 @@
 
 # Constructs a cpBB centered on a point with the given extents (half sizes).
 function BB_for_extents(c::Vect, hw::Real, hh::Real)
-    BB(ccall(dlsym(libchipmunk, :cpBBNewForExtents), Ptr{Void}, (Vect, Cdouble, Cdouble,), c, hw, hh))
+    BB(ccall(Libdl.dlsym(libchipmunk, :cpBBNewForExtents), Ptr{Cvoid}, (Vect, Cdouble, Cdouble,), c, hw, hh))
 end
 
 # Constructs a cpBB for a circle with the given position and radius.
 function BB_for_circle(p::Vect, r::Real)
-    BB(ccall(dlsym(libchipmunk, :cpBBNewForCircle), Ptr{Void}, (Vect, Cdouble,), p, r))
+    BB(ccall(Libdl.dlsym(libchipmunk, :cpBBNewForCircle), Ptr{Cvoid}, (Vect, Cdouble,), p, r))
 end
 
 # Returns true if a and b intersect.
@@ -37,7 +37,7 @@ end
 
 # Returns the center of a bounding box.
 function center(bb::BB)
-    ccall(dlsym(libchipmunk, :cpBBCenter), Vect, (BB,), bb)
+    ccall(Libdl.dlsym(libchipmunk, :cpBBCenter), Vect, (BB,), bb)
 end
 
 # Returns the area of the bounding box.
@@ -52,12 +52,12 @@ end
 
 # Returns the fraction along the segment query the cpBB is hit. Returns INFINITY if it doesn't hit.
 function segment_query(bb::BB, a::Vect, b::Vect)
-    ccall(dlsym(libchipmunk, :cpBBQuery), Cdouble, (BB, Vect, Vect,), bb, a, b)
+    ccall(Libdl.dlsym(libchipmunk, :cpBBQuery), Cdouble, (BB, Vect, Vect,), bb, a, b)
 end
 
 # Return true if the bounding box intersects the line segment with ends a and b.
 function intersects_segment(bb::BB, a::Vect, b::Vect)
-    ccall(dlsym(libchipmunk, :cpBBIntersectsSegment), Bool, (BB, Vect, Vect,), bb, a, b)
+    ccall(Libdl.dlsym(libchipmunk, :cpBBIntersectsSegment), Bool, (BB, Vect, Vect,), bb, a, b)
 end
 
 # Clamp a vector to a bounding box.
@@ -67,12 +67,12 @@ end
 
 # Wrap a vector to a bounding box.
 function wrap_vect(bb::BB, v::Vect)
-    ccall(dlsym(libchipmunk, :cpBBWrapVect), Vect, (BB, Vect,), bb, v)
+    ccall(Libdl.dlsym(libchipmunk, :cpBBWrapVect), Vect, (BB, Vect,), bb, v)
 end
 
 # Returns a bounding box offseted by v.
 function offset(bb::BB, v::Vect)
-    ccall(dlsym(libchipmunk, :cpBBOffset), Vect, (BB, Vect,), bb, v)
+    ccall(Libdl.dlsym(libchipmunk, :cpBBOffset), Vect, (BB, Vect,), bb, v)
 end
 
 export BB_for_extents, BB_for_circle, intersects, containsBB, contains_vect, merge, expand,

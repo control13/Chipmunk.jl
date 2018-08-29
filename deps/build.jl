@@ -1,8 +1,9 @@
-cd("$(Pkg.dir("Chipmunk"))/deps")
+deps_path = @__DIR__
+cd(deps_path)
 println("Checking dependencies...")
 
 try
-    @static if is_linux()
+    @static if Sys.islinux()
         run(`which cmake`)
     end
 catch exception
@@ -14,12 +15,13 @@ println("Good...")
 if !isdir("Chipmunk2D")
     println("Cloning Chipmunk source...")
 
-    cd(Pkg.dir("Chipmunk")*"/deps")
+    cd(deps_path)
     run(`git clone https://github.com/slembcke/Chipmunk2D.git`)
 end
 
 cd("Chipmunk2D")
-run(`git checkout Chipmunk-7.0.2`)
+chipmunk_version = "7.0.2"
+run(`git checkout Chipmunk-$(chipmunk_version)`)
 
 # run(`git checkout Chipmunk-7.0.0`)
 
@@ -28,23 +30,23 @@ run(`make`)
 
 ext = ""
 
-@static if is_linux()
+@static if Sys.islinux()
     ext = "so"
-    cp("src/libchipmunk.so.7.0.0", "../libchipmunk.so", remove_destination=true)
+    cp("src/libchipmunk.so.$(chipmunk_version)", "../libchipmunk.so", force=true)
 end
-@static if is_apple()
+@static if Sys.isapple()
     ext = "dylib"
-    cp("src/libchipmunk.7.0.0.dylib", "../libchipmunk.dylib", remove_destination=true)
+    cp("src/libchipmunk.$(chipmunk_version).dylib", "../libchipmunk.dylib", force=true)
 end
-@static if is_windows()
+@static if Sys.iswindows()
     ext = "dll"
-    cp("src/libchipmunk.7.0.0.dll", "../libchipmunk.dll", remove_destination=true)
+    cp("src/libchipmunk.$(chipmunk_version).dll", "../libchipmunk.dll", force=true)
 end
 
 
 cd("..")
 
-run(`gcc -fPIC -I./Chipmunk2D/include/chipmunk -c $(Pkg.dir("Chipmunk"))/src/c/chipmunkjl.c`)
+run(`gcc -fPIC -I./Chipmunk2D/include/chipmunk -c $(deps_path)/../src/c/chipmunkjl.c`)
 run(`gcc -I./Chipmunk2D/include/chipmunk -L. -lchipmunk -shared -o ./libchipmunkjl.$ext chipmunkjl.o`)
 run(`rm chipmunkjl.o`)
 

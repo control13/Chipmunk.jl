@@ -1,5 +1,5 @@
 using Chipmunk
-using Base.Test
+using Test
 
 # write your own tests here
 @test begin
@@ -12,7 +12,7 @@ using Base.Test
 
         add_body(space, body)
 
-        timestep = 1./60
+        timestep = 1/60
         for i = 1:100
             step(space, timestep)
             sleep(timestep)

@@ -1,129 +1,129 @@
 function CircleShape(body::Body, radius::Real, offset::Vect)
-    CircleShape(ccall(dlsym(libchipmunk, :cpCircleShapeNew), Ptr{Void}, (Ptr{Void}, Cdouble, Vect,), body.ptr, radius, offset))
+    CircleShape(ccall(Libdl.dlsym(libchipmunk, :cpCircleShapeNew), Ptr{Cvoid}, (Ptr{Cvoid}, Cdouble, Vect,), body.ptr, radius, offset))
 end
 
 function get_offset(shape::CircleShape)
-    ccall(dlsym(libchipmunk, :cpCircleShapeGetOffset), Vect, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpCircleShapeGetOffset), Vect, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_radius(shape::CircleShape)
-    ccall(dlsym(libchipmunk, :cpCircleShapeGetRadius), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpCircleShapeGetRadius), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function SegmentShape(body::Body, a::Vect, b::Vect, radius::Real)
-    SegmentShape(ccall(dlsym(libchipmunk, :cpSegmentShapeNew), Ptr{Void}, (Ptr{Void}, Vect, Vect, Cdouble,), body.ptr, a, b, radius))
+    SegmentShape(ccall(Libdl.dlsym(libchipmunk, :cpSegmentShapeNew), Ptr{Cvoid}, (Ptr{Cvoid}, Vect, Vect, Cdouble,), body.ptr, a, b, radius))
 end
 
 function set_neighbors(shape::SegmentShape, prev::Vect, next::Vect)
-    ccall(dlsym(libchipmunk, :cpSegmentShapeSetNeighbors), Void, (Ptr{Void}, Vect, Vect,), shape.ptr, prev, next)
+    ccall(Libdl.dlsym(libchipmunk, :cpSegmentShapeSetNeighbors), Cvoid, (Ptr{Cvoid}, Vect, Vect,), shape.ptr, prev, next)
 end
 
 function get_a(shape::SegmentShape)
-    ccall(dlsym(libchipmunk, :cpSegmentShapeGetA), Vect, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpSegmentShapeGetA), Vect, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_b(shape::SegmentShape)
-    ccall(dlsym(libchipmunk, :cpSegmentShapeGetB), Vect, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpSegmentShapeGetB), Vect, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_normal(shape::SegmentShape)
-    ccall(dlsym(libchipmunk, :cpSegmentShapeGetNormal), Vect, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpSegmentShapeGetNormal), Vect, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_radius(shape::SegmentShape)
-    ccall(dlsym(libchipmunk, :cpSegmentShapeGetRadius), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpSegmentShapeGetRadius), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function free(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeFree), Void, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeFree), Cvoid, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_space(shape::Shape)
-    Space(ccall(dlsym(libchipmunk, :cpShapeGetSpace), Ptr{Void}, (Ptr{Void},), shape.ptr))
+    Space(ccall(Libdl.dlsym(libchipmunk, :cpShapeGetSpace), Ptr{Cvoid}, (Ptr{Cvoid},), shape.ptr))
 end
 
 function get_body(shape::Shape)
-    Body(ccall(dlsym(libchipmunk, :cpShapeGetBody), Ptr{Void}, (Ptr{Void},), shape.ptr))
+    Body(ccall(Libdl.dlsym(libchipmunk, :cpShapeGetBody), Ptr{Cvoid}, (Ptr{Cvoid},), shape.ptr))
 end
 
 function set_body(shape::Shape, body::Body)
-    ccall(dlsym(libchipmunk, :cpShapeSetBody), Void, (Ptr{Void}, Ptr{Void},), shape.ptr, body.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetBody), Cvoid, (Ptr{Cvoid}, Ptr{Cvoid},), shape.ptr, body.ptr)
 end
 
 function get_mass(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetMass), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetMass), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function set_mass(shape::Shape, mass::Real)
-    ccall(dlsym(libchipmunk, :cpShapeSetMass), Void, (Ptr{Void}, Cdouble,), shape.ptr, mass)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetMass), Cvoid, (Ptr{Cvoid}, Cdouble,), shape.ptr, mass)
 end
 
 function get_density(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetDensity), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetDensity), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function set_density(shape::Shape, density::Real)
-    ccall(dlsym(libchipmunk, :cpShapeSetDensity), Void, (Ptr{Void}, Cdouble,), shape.ptr, density)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetDensity), Cvoid, (Ptr{Cvoid}, Cdouble,), shape.ptr, density)
 end
 
 function get_moment(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetMoment), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetMoment), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_area(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetArea), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetArea), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_center_of_gravity(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetCenterOfGravity), Vect, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetCenterOfGravity), Vect, (Ptr{Cvoid},), shape.ptr)
 end
 
 function get_sensor(shape::Shape)
-    Bool(ccall(libchipmunk, :cpShapeGetSensor), UInt8, (Ptr{Void},), shape.ptr)
+    Bool(ccall(Libdl.dlsym(libchipmunk, :cpShapeGetSensor), UInt8, (Ptr{Cvoid},), shape.ptr))
 end
 
 function set_sensor(shape::Shape, sensor::Bool)
-    ccall(dlsym(libchipmunk, :cpShapeSetSensor), Void, (Ptr{Void}, Int32,), shape.ptr, sensor)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetSensor), Cvoid, (Ptr{Cvoid}, Int32,), shape.ptr, sensor)
 end
 
 function get_elasticity(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetElasticity), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetElasticity), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function set_elasticity(shape::Shape, elasticity::Real)
-    ccall(dlsym(libchipmunk, :cpShapeSetElasticity), Void, (Ptr{Void}, Cdouble,), shape.ptr, elasticity)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetElasticity), Cvoid, (Ptr{Cvoid}, Cdouble,), shape.ptr, elasticity)
 end
 
 function get_friction(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetFriction), Cdouble, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetFriction), Cdouble, (Ptr{Cvoid},), shape.ptr)
 end
 
 function set_friction(shape::Shape, friction::Real)
-    ccall(dlsym(libchipmunk, :cpShapeSetFriction), Void, (Ptr{Void}, Cdouble,), shape.ptr, friction)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetFriction), Cvoid, (Ptr{Cvoid}, Cdouble,), shape.ptr, friction)
 end
 
 function get_surface_velocity(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetSurfaceVelocity), Vect, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetSurfaceVelocity), Vect, (Ptr{Cvoid},), shape.ptr)
 end
 
 function set_surface_velocity(shape::Shape, velocity::Vect)
-    ccall(dlsym(libchipmunk, :cpShapeSetSurfaceVelocity), Void, (Ptr{Void}, Vect,), shape.ptr, velocity)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetSurfaceVelocity), Cvoid, (Ptr{Cvoid}, Vect,), shape.ptr, velocity)
 end
 
 function get_userdata(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetUserData), Ptr{Void}, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetUserData), Ptr{Cvoid}, (Ptr{Cvoid},), shape.ptr)
 end
 
-function set_userdata(shape::Shape, userdata::Ptr{Void})
-    ccall(dlsym(libchipmunk, :cpShapeSetUserData), Void, (Ptr{Void}, Ptr{Void},), shape.ptr, userdata)
+function set_userdata(shape::Shape, userdata::Ptr{Cvoid})
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetUserData), Cvoid, (Ptr{Cvoid}, Ptr{Cvoid},), shape.ptr, userdata)
 end
 
 function get_collision_type(shape::Shape)
-    ccall(dlsym(libchipmunk, :cpShapeGetCollisionType), UInt32, (Ptr{Void},), shape.ptr)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeGetCollisionType), UInt32, (Ptr{Cvoid},), shape.ptr)
 end
 
 function set_collision_type(shape::Shape, ctype::Integer)
-    ccall(dlsym(libchipmunk, :cpShapeSetCollisionType), Void, (Ptr{Void}, UInt32,), shape.ptr, ctype)
+    ccall(Libdl.dlsym(libchipmunk, :cpShapeSetCollisionType), Cvoid, (Ptr{Cvoid}, UInt32,), shape.ptr, ctype)
 end
 
 export free, get_space, get_body, set_body, get_mass, set_mass, get_density, set_density, get_moment, get_area,
