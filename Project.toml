@@ -4,5 +4,4 @@ version = "0.0.5"
 
 [deps]
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-SFML = "d50d9232-525f-5d35-8703-6ae49672cafe"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
